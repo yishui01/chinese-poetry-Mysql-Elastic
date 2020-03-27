@@ -44,9 +44,7 @@ class ES
                     'number_of_replicas' => $this->esConf['number_of_replicas']
                 ],
                 'mappings' => [
-                    [
-                        'properties' => $this->getProperties()
-                    ]
+                    'properties' => $this->getProperties()
                 ]
             ]
         ];
@@ -124,7 +122,7 @@ class ES
             'notes'       => ['type' => 'text'],
             'paragraphs'  => ['type' => 'text'],
             'content'     => ['type' => 'text'],
-            'create_time' => ['type' => 'date'],
+            'create_time' => ['type' => 'date', "format" => "yyyy-MM-dd HH:mm:ss"],
         ];
         if ($textSetIK) {
             foreach ($p as $k => $v) {

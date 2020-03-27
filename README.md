@@ -40,15 +40,14 @@ php ES.php
 
 ### 转换为.sql文件
 
-1、下载要转换的诗词库
+1、在当前目录下载要转换的诗词库
 ```shell script
-git clone https://github.com/chinese-poetry/chinese-poetry.git
+git clone https://github.com/chinese-poetry/chinese-poetry.git chinese-poetry
 ```
 2、安装composer依赖
 ```shell script
 composer install
 ```
-
 3、执行，在当前目录会重新生成sql目录
 ```shell script
 php Worker.php

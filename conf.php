@@ -3,11 +3,11 @@
 return [
     'mysql' => [
         'tableName' => 'poems', //存放诗词的mysql表名,不建议修改，这里改了那当前目录table.sql里面的table名也需要改
-        'dbhost'    => '127.0.0.1',
+        'dbhost'    => '192.168.136.109',
         'dbport'    => '3306',
         'dbuser'    => 'root',
-        'dbpw'      => 'root',
-        'dbname'    => 'test',
+        'dbpw'      => '123456',
+        'dbname'    => 'test_blog',
     ],
 
     'es' => [

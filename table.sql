@@ -1,6 +1,6 @@
 create table IF NOT EXISTS `poems` (
     id int unsigned not null primary key auto_increment,
-    type varchar (50) not null ,
+    cate varchar (50) not null ,
     sn varchar (32) not null ,
     title varchar (200) not null ,
     author varchar (200) default "",

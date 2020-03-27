@@ -63,7 +63,7 @@ class Worker
             $sourceFile = $v["source"];
             $distFile = $this->distDir . $v["dist"];
             file_put_contents($distFile,
-                "INSERT INTO `" . $tableName . "` (`sn`,`type`,`title`,`author`,`rhythmic`,`chapter`,`section`,`notes`,`paragraphs`,`comment`,`content`,`create_time`) VALUES \r\n");
+                "INSERT INTO `" . $tableName . "` (`sn`,`cate`,`title`,`author`,`rhythmic`,`chapter`,`section`,`notes`,`paragraphs`,`comment`,`content`,`create_time`) VALUES \r\n");
             $type = $v['typeField'];
             $content = '';
             $id = 0;
