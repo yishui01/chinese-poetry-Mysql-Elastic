@@ -1,0 +1,18 @@
+
+
+【2020-03-27 16:32:29】开始导入：
+./table.sql导入数据库成功
+【2020-03-27 16:32:29】导入结束：
+
+
+【2020-03-27 16:32:29】开始导入：
+./sql/ci.sql导入数据库成功
+./sql/huajianji.sql导入数据库成功
+./sql/lunyu.sql导入数据库成功
+./sql/nantang.sql导入数据库成功
+./sql/shijing.sql导入数据库成功
+./sql/sishuwujing.sql导入数据库成功
+./sql/song.sql导入数据库成功
+./sql/tang.sql导入数据库成功
+./sql/youmengying.sql导入数据库成功
+【2020-03-27 16:32:43】导入结束：
