@@ -5,40 +5,43 @@ require './lib/mysql.php';
 
 class ES
 {
-    public $host = ['192.168.136.109:9200']; //ES HOST
-    public $index = 'poems';
-    public $number_of_shards = '2';
-    public $number_of_replicas = '0';
-
-    public $es;
-
+    public $esConf = [
+        'host'               => ['192.168.136.109:9200'], //ES HOST
+        'index'              => 'poems',
+        'number_of_shards'   => '2',
+        'number_of_replicas' => '0',
+    ];
     public $mysqlConf = [
         'tableName' => 'poems', //存放诗词的mysql表名
-        'dbhost' => '127.0.0.1',
-        'dbport' => '3306',
-        'dbuser' => 'root',
-        'dbpw'   => 'root',
-        'dbname' => 'test',
+        'dbhost'    => '127.0.0.1',
+        'dbport'    => '3306',
+        'dbuser'    => 'root',
+        'dbpw'      => 'root',
+        'dbname'    => 'test',
     ];
+
+    public $es;
     public $link;
 
-    public function __construct()
+    public function __construct($conf)
     {
+        $this->mysqlConf = $conf['mysql'];
+        $this->esConf = $conf['es'];
+
         ini_set('memory_limit', '1024M');
-        $this->es = \Elasticsearch\ClientBuilder::create(
-            ['logging' => false] //节约内存
-        )->setHosts($this->host)->build();
+        $this->es = \Elasticsearch\ClientBuilder::create(['logging' => false])  //关闭log节约内存
+        ->setHosts($this->esConf['host'])->build();
         $this->link = (new Mysql($this->mysqlConf))->link;
     }
 
     public function createIndex()
     {
         $params = [
-            'index' => $this->index,
+            'index' => $this->esConf['index'],
             'body'  => [
                 'settings' => [
-                    'number_of_shards'   => $this->number_of_shards,
-                    'number_of_replicas' => $this->number_of_replicas
+                    'number_of_shards'   => $this->esConf['number_of_shards'],
+                    'number_of_replicas' => $this->esConf['number_of_replicas']
                 ],
                 'mappings' => [
                     [
@@ -47,9 +50,8 @@ class ES
                 ]
             ]
         ];
-        if (!$this->es->indices()->exists(['index' => $this->index])) {
+        if (!$this->es->indices()->exists(['index' => $this->esConf['index']])) {
             $this->es->indices()->create($params);
-
         }
         return true;
     }
@@ -61,14 +63,14 @@ class ES
             MYSQLI_USE_RESULT);
 
         $data = [
-            'index' => $this->index,
+            'index' => $this->esConf['index'],
             'body'  => []
         ];
 
         foreach ($this->getRow($uresult) as $k => $row) {
             $data['body'][] = [
                 'index' => [
-                    '_index' => $this->index,
+                    '_index' => $this->esConf['index'],
                     '_id'    => $row['id']
                 ]
             ];
@@ -135,7 +137,8 @@ class ES
     }
 }
 
-$obj = new ES();
+$conf = require './conf.php';
+$obj = new ES($conf);
 $obj->createIndex();
 $obj->mysqlToEs();
 

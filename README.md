@@ -17,7 +17,8 @@
 ## 使用
 目前本仓库内已经转换好了sql文件，可以直接使用，sql内诗词已全部转换为**简体中文**
 
-###将sql文件导入mysql
+### 将sql文件导入mysql
+
 1、配置conf.php 数据库地址
 
 2、导入到mysql
@@ -26,7 +27,8 @@ php Mysql.php
 ```
 <hr />
 
-###查询mysql数据导入elasticsearch (必须先导入mysql才可导出到ES)
+### 查询mysql数据导入elasticsearch (必须先导入mysql才可导出到ES)
+
 1、配置conf.php 数据库地址
 
 2、导入到ES
@@ -36,7 +38,7 @@ php ES.php
 <hr />
 
 
-##转换为.sql文件
+### 转换为.sql文件
 
 1、下载要转换的诗词库
 ```shell
