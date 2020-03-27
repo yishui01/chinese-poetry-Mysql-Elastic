@@ -22,7 +22,7 @@
 1、配置conf.php 数据库地址
 
 2、导入到mysql
-```php
+```shell script
 php Mysql.php
 ```
 <hr />
@@ -32,7 +32,7 @@ php Mysql.php
 1、配置conf.php 数据库地址
 
 2、导入到ES
-```php
+```shell script
 php ES.php
 ```
 <hr />
@@ -41,16 +41,16 @@ php ES.php
 ### 转换为.sql文件
 
 1、下载要转换的诗词库
-```shell
+```shell script
 git clone https://github.com/chinese-poetry/chinese-poetry.git
 ```
 2、安装composer依赖
-```shell
+```shell script
 composer install
 ```
 
 3、执行，在当前目录会重新生成sql目录
-```shell
+```shell script
 php Worker.php
 ```
 
