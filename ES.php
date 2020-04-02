@@ -108,13 +108,13 @@ class ES
 
     public function getProperties()
     {
-        $textSetIK = false; //是否对text类型使用中文分词插件（需要事先在es中启用）
+        $textSetIK = true; //是否对text类型使用中文分词插件（需要事先在es中启用）
         $p = [
             'id'          => ['type' => 'integer'],
             'cate'        => ['type' => 'keyword'],
             'sn'          => ['type' => 'keyword'],
+            'author'      => ['type' => 'keyword'],
             'title'       => ['type' => 'text'],
-            'author'      => ['type' => 'text'],
             'rhythmic'    => ['type' => 'text'],
             'chapter'     => ['type' => 'text'],
             'section'     => ['type' => 'text'],
@@ -127,7 +127,7 @@ class ES
         if ($textSetIK) {
             foreach ($p as $k => $v) {
                 if ($v['type'] == 'text') {
-                    $v['analyzer'] = 'ik_smart';
+                    $p[$k]['analyzer'] = 'ik_smart';
                 }
             }
         }
