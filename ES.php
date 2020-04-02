@@ -111,7 +111,7 @@ class ES
         $textSetIK = false; //是否对text类型使用中文分词插件（需要事先在es中启用）
         $p = [
             'id'          => ['type' => 'integer'],
-            'type'        => ['type' => 'keyword'],
+            'cate'        => ['type' => 'keyword'],
             'sn'          => ['type' => 'keyword'],
             'title'       => ['type' => 'text'],
             'author'      => ['type' => 'text'],
