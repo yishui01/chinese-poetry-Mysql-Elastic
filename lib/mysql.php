@@ -30,7 +30,7 @@ class Mysql
     {
         $link = mysqli_connect($this->dbhost, $this->dbuser, $this->dbpw, null, $this->dbport);
         if (!$link) {
-            throw new \Exception("数据库连接失败");
+            throw new \Exception("数据库连接失败:" . mysqli_connect_error());
         } else {
             $this->link = $link;
         }
@@ -39,11 +39,14 @@ class Mysql
         $version = mysqli_get_server_info($this->link);
         //设置字符集
         if ($version > '4.1' && $this->dbcharset) {
-            mysqli_query($link, "SET NAMES {$this->dbcharset}");
+            if (!($charset = mysqli_query($link, "SET NAMES {$this->dbcharset}"))) {
+                throw new \Exception("设置字符集失败" . mysqli_error($this->link));
+            }
         }
         //选择数据库
-        mysqli_select_db($this->link, $this->dbname);
-
+        if (!($selectDb = mysqli_select_db($this->link, $this->dbname))) {
+            throw new \Exception("选择数据库失败：" . mysqli_error($this->link) . "数据库为：" . $this->dbname);
+        }
     }
 
     /**
